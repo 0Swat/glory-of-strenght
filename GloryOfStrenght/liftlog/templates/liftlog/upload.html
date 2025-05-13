@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <title>Dodaj Podniesienie</title>
+</head>
+<body>
+    <h1>Dodaj Nowe Podniesienie</h1>
+    <a href="{% url 'home' %}">← Wróć do listy</a>
+    <hr>
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Zapisz</button>
+    </form>
+</body>
+</html>

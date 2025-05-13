@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <title>Moje Podniesienia</title>
+</head>
+<body>
+    <h1>Moje Najlepsze Podniesienia</h1>
+    <a href="{% url 'upload' %}">➕ Dodaj nowe podniesienie</a>
+    <hr>
+    {% for video in videos %}
+        <div style="margin-bottom: 30px;">
+            <h2>{{ video.title }}</h2>
+            <p>Typ: {{ video.get_lift_type_display }} | Ciężar: {{ video.weight }} kg | Data: {{ video.date }}</p>
+            <video width="480" controls>
+                <source src="{{ video.video.url }}" type="video/mp4">
+                Twój przeglądarka nie obsługuje odtwarzania wideo.
+            </video>
+        </div>
+    {% empty %}
+        <p>Brak filmów do wyświetlenia.</p>
+    {% endfor %}
+</body>
+</html>

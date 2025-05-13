@@ -14,4 +14,4 @@ def upload_video(request):
             return redirect('home')
     else:
         form = LiftVideoForm()
-    return render(request, 'liftlog\upload.html', {'form': form})
+    return render(request, 'liftlog/upload.html', {'form': form})
