@@ -1,6 +1,6 @@
 from django.apps import AppConfig
 
 
-class LiftlogConfig(AppConfig):
+class AttempsConfig(AppConfig):
     default_auto_field = 'django.db.models.BigAutoField'
-    name = 'liftlog'
+    name = 'Attemps'
