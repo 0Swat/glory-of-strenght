@@ -20,17 +20,14 @@
 
   {% if attempt.video %}
     <div class="card video-card">
-      <h2>Nagranie</h2>
       <video class="player" controls preload="metadata" playsinline>
         <source src="{{ attempt.video.url }}" type="video/mp4">
         <source src="{{ attempt.video.url }}" type="video/webm">
         <p>Twoja przeglądarka nie obsługuje wideo. <a href="{{ attempt.video.url }}">Pobierz plik</a>.</p>
       </video>
-      
-      <div class="form-actions" style="margin-bottom:12px;">
-        <a href="{% url 'attempt_delete' attempt.pk %}" class="btn btn-danger">Usuń</a>
-      </div>
-
     </div>
   {% endif %}
+    <div class="form-actions" style="margin-bottom:12px;">
+      <a href="{% url 'attempt_delete' attempt.pk %}" class="btn btn-danger">Usuń</a>
+    </div>
 {% endblock %}
