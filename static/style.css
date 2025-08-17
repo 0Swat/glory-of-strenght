@@ -136,3 +136,16 @@ code{
 .msg{padding:10px 12px; border-radius:10px; border:1px solid rgba(255,255,255,.08); margin:0 0 8px}
 .msg.success{background: linear-gradient(180deg, rgba(102,217,163,.18), rgba(102,217,163,.12)); border-color: rgba(102,217,163,.45)}
 .msg.error{background: linear-gradient(180deg, rgba(255,107,107,.18), rgba(255,107,107,.12)); border-color: rgba(255,107,107,.45)}
+
+
+.filterbar{margin-bottom:16px; padding:16px}
+.filter-grid{
+  display:grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap:12px;
+  align-items:end;
+}
+.filter-grid .actions{display:flex; gap:8px; align-items:center}
+.checkbox-field{display:flex; align-items:end}
+.checkbox{display:flex; gap:8px; align-items:center; color:var(--muted)}
+@media (max-width:900px){ .filter-grid{grid-template-columns: 1fr 1fr} }

@@ -3,6 +3,33 @@
 {% block content %}
   <h1>Twoje najlepsze podejścia</h1>
 
+  <form method="get" class="card filterbar">
+    <div class="filter-grid">
+      <div class="field">
+        <label for="type">Rodzaj boju</label>
+        <select id="type" name="type" class="input">
+          <option value="">Wszystkie</option>
+          {% for value,label in lift_types %}
+            <option value="{{ value }}" {% if filters.type == value %}selected{% endif %}>{{ label }}</option>
+          {% endfor %}
+        </select>
+      </div>
+
+      <div class="field">
+        <label for="sort">Sortowanie</label>
+        <select id="sort" name="sort" class="input">
+          <option value="weight_desc" {% if sort == 'weight_desc' %}selected{% endif %}>Ciężar: malejąco</option>
+          <option value="weight_asc" {% if sort == 'weight_asc' %}selected{% endif %}>Ciężar: rosnąco</option>
+        </select>
+      </div>
+
+      <div class="field actions">
+        <button class="btn" type="submit">Zastosuj</button>
+        <a class="btn btn-outline" href="{% url 'index' %}">Wyczyść</a>
+      </div>
+    </div>
+  </form>
+
   {% if not table_ready %}
     <div class="card warning">
       <p><strong>Uwaga:</strong> Wygląda na to, że nie wykonano migracji bazy danych.</p>
@@ -32,7 +59,7 @@
     </div>
   {% else %}
     <div class="empty">
-      <p>Brak zapisanych prób. <a href="{% url 'add_attempt' %}">Dodaj pierwszą</a>!</p>
+      <p>Brak prób dla wybranych filtrów. <a href="{% url 'index' %}">Wyczyść</a> lub <a href="{% url 'add_attempt' %}">dodaj pierwszą</a>!</p>
     </div>
   {% endif %}
 {% endblock %}
