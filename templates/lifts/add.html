@@ -3,7 +3,7 @@
 {% block content %}
   <h1>Dodaj nową próbę</h1>
 
-  <form method="post" class="form card">
+  <form method="post" enctype="multipart/form-data" class="form card">
     {% csrf_token %}
     <div class="form-grid">
       <div class="field">
@@ -28,6 +28,13 @@
         <label for="{{ form.notes.id_for_label }}">Notatki</label>
         {{ form.notes }}
         {% if form.notes.errors %}<div class="error">{{ form.notes.errors }}</div>{% endif %}
+      </div>
+
+      <div class="field field-full">
+        <label for="{{ form.video.id_for_label }}">Nagranie (opcjonalnie)</label>
+        {{ form.video }}
+        {% if form.video.errors %}<div class="error">{{ form.video.errors }}</div>{% endif %}
+        <small class="help">Obsługiwane: mp4, mov, webm, m4v</small>
       </div>
     </div>
 

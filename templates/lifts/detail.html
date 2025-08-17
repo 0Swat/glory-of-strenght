@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <a href="{% url 'index' %}" class="btn btn-outline">← Wróć do listy</a>
+  <h1>Szczegóły podejścia</h1>
+<div class="form-actions" style="margin-bottom:12px;"><a href="{% url 'index' %}" class="btn btn-outline">← Wróć do listy</a>
+<a href="{% url 'attempt_delete' attempt.pk %}" class="btn btn-danger">Usuń</a>
+</div>
+
+  <article class="card">
+    <header class="card-header">
+      <span class="badge">{{ attempt.get_lift_type_display }}</span>
+      <div class="right-meta">
+        {% if attempt.video %}<span class="video-indicator" title="Nagranie dostępne">🎬</span>{% endif %}
+        <time datetime="{{ attempt.date }}">{{ attempt.date }}</time>
+      </div>
+    </header>
+    <div class="card-body">
+      <div class="pr-value">{{ attempt.weight_kg }} kg</div>
+      {% if attempt.notes %}<p class="notes">{{ attempt.notes }}</p>{% endif %}
+    </div>
+  </article>
+
+  {% if attempt.video %}
+    <div class="card video-card">
+      <h2>Nagranie</h2>
+      <video controls preload="metadata" style="width:100%; border-radius:12px; outline:none;">
+        <source src="{{ attempt.video.url }}" type="video/mp4">
+        <source src="{{ attempt.video.url }}" type="video/webm">
+        <p>Twoja przeglądarka nie obsługuje odtwarzacza wideo. <a href="{{ attempt.video.url }}">Pobierz plik</a>.</p>
+      </video>
+    </div>
+  {% endif %}
+{% endblock %}

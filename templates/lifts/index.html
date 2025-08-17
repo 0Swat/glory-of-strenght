@@ -13,18 +13,21 @@
   {% if attempts %}
     <div class="grid">
       {% for a in attempts %}
-        <article class="card">
+        <a class="card card-link" href="{% url 'attempt_detail' a.pk %}">
           <header class="card-header">
             <span class="badge">{{ a.get_lift_type_display }}</span>
-            <time datetime="{{ a.date }}">{{ a.date }}</time>
+            <div class="right-meta">
+              {% if a.video %}<span class="video-indicator" title="Ma nagranie">🎬</span>{% endif %}
+              <time datetime="{{ a.date }}">{{ a.date }}</time>
+            </div>
           </header>
           <div class="card-body">
             <div class="pr-value">{{ a.weight_kg }} kg</div>
             {% if a.notes %}
-              <p class="notes">{{ a.notes }}</p>
+              <p class="notes">{{ a.notes|truncatechars:120 }}</p>
             {% endif %}
           </div>
-        </article>
+        </a>
       {% endfor %}
     </div>
   {% else %}

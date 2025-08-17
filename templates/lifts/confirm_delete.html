@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <h1>Usunąć to podejście?</h1>
+  <article class="card">
+    <header class="card-header">
+      <span class="badge">{{ attempt.get_lift_type_display }}</span>
+      <div class="right-meta">
+        {% if attempt.video %}<span class="video-indicator" title="Nagranie dostępne">🎬</span>{% endif %}
+        <time datetime="{{ attempt.date }}">{{ attempt.date }}</time>
+      </div>
+    </header>
+    <div class="card-body">
+      <div class="pr-value">{{ attempt.weight_kg }} kg</div>
+      {% if attempt.notes %}<p class="notes">{{ attempt.notes }}</p>{% endif %}
+    </div>
+  </article>
+
+  <form method="post" class="form card" style="margin-top:12px;">
+    {% csrf_token %}
+    <p><strong>Ta operacja jest nieodwracalna.</strong></p>
+    <div class="form-actions">
+      <a href="{% url 'attempt_detail' attempt.pk %}" class="btn btn-outline">Anuluj</a>
+      <button type="submit" class="btn btn-danger">Usuń</button>
+    </div>
+  </form>
+{% endblock %}

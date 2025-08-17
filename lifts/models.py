@@ -1,4 +1,5 @@
 from django.db import models
+from django.core.validators import FileExtensionValidator
 
 class LiftType(models.TextChoices):
     SQUAT = 'przysiad', 'Przysiad'
@@ -10,6 +11,11 @@ class LiftAttempt(models.Model):
     weight_kg = models.DecimalField(max_digits=6, decimal_places=2)
     date = models.DateField()
     notes = models.TextField(blank=True)
+    video = models.FileField(
+        upload_to='videos/',
+        blank=True, null=True,
+        validators=[FileExtensionValidator(allowed_extensions=['mp4','mov','webm','m4v'])]
+    )
 
     class Meta:
         ordering = ['-date', '-weight_kg']
