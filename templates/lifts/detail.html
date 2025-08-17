@@ -3,9 +3,6 @@
 {% block content %}
   <a href="{% url 'index' %}" class="btn btn-outline">← Wróć do listy</a>
   <h1>Szczegóły podejścia</h1>
-<div class="form-actions" style="margin-bottom:12px;"><a href="{% url 'index' %}" class="btn btn-outline">← Wróć do listy</a>
-<a href="{% url 'attempt_delete' attempt.pk %}" class="btn btn-danger">Usuń</a>
-</div>
 
   <article class="card">
     <header class="card-header">
@@ -24,11 +21,16 @@
   {% if attempt.video %}
     <div class="card video-card">
       <h2>Nagranie</h2>
-      <video controls preload="metadata" style="width:100%; border-radius:12px; outline:none;">
+      <video class="player" controls preload="metadata" playsinline>
         <source src="{{ attempt.video.url }}" type="video/mp4">
         <source src="{{ attempt.video.url }}" type="video/webm">
-        <p>Twoja przeglądarka nie obsługuje odtwarzacza wideo. <a href="{{ attempt.video.url }}">Pobierz plik</a>.</p>
+        <p>Twoja przeglądarka nie obsługuje wideo. <a href="{{ attempt.video.url }}">Pobierz plik</a>.</p>
       </video>
+      
+      <div class="form-actions" style="margin-bottom:12px;">
+        <a href="{% url 'attempt_delete' attempt.pk %}" class="btn btn-danger">Usuń</a>
+      </div>
+
     </div>
   {% endif %}
 {% endblock %}

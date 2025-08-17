@@ -126,6 +126,24 @@ code{
 .video-card h2{margin-top:0; font-size:18px; color:var(--muted)}
 .help{color:var(--muted)}
 
+/* Odtwarzacz wideo: ogranicz wysokość, zachowaj proporcje */
+.video-card .player{
+  display:block;
+  max-height: 70vh;    /* <— kluczowe: maks. 70% wysokości okna */
+  width: auto;         /* pozwól zwężać się w poziomie */
+  max-width: 100%;     /* ale nie wychodź poza kartę */
+  margin: 0 auto;
+  background: #000;
+  border-radius: 12px;
+  object-fit: contain; /* nie rozciągaj – zmieść całe wideo */
+  outline: none;
+}
+
+@media (max-width: 700px){
+  .video-card .player{ max-height: 55vh; } /* trochę niższe na telefonach */
+}
+
+
 
 .btn-danger{
   background: linear-gradient(180deg, rgba(255,107,107,.22), rgba(255,107,107,.18));
