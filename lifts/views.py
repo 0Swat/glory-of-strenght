@@ -24,11 +24,15 @@ def index(request):
             filters['type'] = lift_type
 
         # Sortowanie tylko po ciężarze
+        sort = request.GET.get('sort')
+        if sort not in ('weight_desc', 'weight_asc'):
+            sort = 'weight_desc'
+            
         sort_map = {
             'weight_desc': '-weight_kg',
             'weight_asc': 'weight_kg',
         }
-        qs = qs.order_by(sort_map.get(sort, '-weight_kg'))
+        qs = qs.order_by(sort_map[sort])
 
         attempts = qs
 
