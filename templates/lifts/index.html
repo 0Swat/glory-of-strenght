@@ -7,7 +7,7 @@
     <div class="filter-grid">
       <div class="field">
         <label for="type">Rodzaj boju</label>
-        <select id="type" name="type" class="input">
+        <select id="type" name="type" class="input" onchange="this.form.submit()">
           <option value="">Wszystkie</option>
           {% for value,label in lift_types %}
             <option value="{{ value }}" {% if filters.type == value %}selected{% endif %}>{{ label }}</option>
@@ -17,15 +17,12 @@
 
       <div class="field">
         <label for="sort">Sortowanie</label>
-        <select id="sort" name="sort" class="input">
+        <select id="sort" name="sort" class="input" onchange="this.form.submit()">
           <option value="weight_desc" {% if sort == 'weight_desc' %}selected{% endif %}>Ciężar: malejąco</option>
           <option value="weight_asc" {% if sort == 'weight_asc' %}selected{% endif %}>Ciężar: rosnąco</option>
         </select>
       </div>
 
-      <div class="field actions">
-        <button class="btn" type="submit">Zastosuj</button>
-      </div>
     </div>
   </form>
 
