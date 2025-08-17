@@ -1,4 +1,5 @@
 from django import forms
+from django.utils import timezone
 from .models import LiftAttempt
 
 class LiftAttemptForm(forms.ModelForm):
@@ -7,7 +8,10 @@ class LiftAttemptForm(forms.ModelForm):
         fields = ['lift_type', 'weight_kg', 'date', 'notes', 'video']
         widgets = {
             'lift_type': forms.Select(attrs={'class': 'input'}),
-            'weight_kg': forms.NumberInput(attrs={'step': '0.5', 'class': 'input', 'placeholder': 'np. 200.0'}),
+            'weight_kg': forms.NumberInput(attrs={
+                'step': '0.5', 'class': 'input', 'placeholder': 'np. 200.0',
+                'min': '0.5'
+            }),
             'date': forms.DateInput(attrs={'type': 'date', 'class': 'input'}),
             'notes': forms.Textarea(attrs={'rows': 4, 'class': 'input', 'placeholder': 'Opcjonalne notatki…'}),
             'video': forms.ClearableFileInput(attrs={'class': 'input', 'accept': 'video/*'}),
@@ -19,3 +23,7 @@ class LiftAttemptForm(forms.ModelForm):
             'notes': 'Notatki',
             'video': 'Nagranie (opcjonalnie)',
         }
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields['date'].widget.attrs['max'] = timezone.localdate().isoformat()
