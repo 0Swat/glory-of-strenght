@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <h1>Dodaj nową próbę</h1>
+
+  <form method="post" class="form card">
+    {% csrf_token %}
+    <div class="form-grid">
+      <div class="field">
+        <label for="{{ form.lift_type.id_for_label }}">Rodzaj boju</label>
+        {{ form.lift_type }}
+        {% if form.lift_type.errors %}<div class="error">{{ form.lift_type.errors }}</div>{% endif %}
+      </div>
+
+      <div class="field">
+        <label for="{{ form.weight_kg.id_for_label }}">Ciężar (kg)</label>
+        {{ form.weight_kg }}
+        {% if form.weight_kg.errors %}<div class="error">{{ form.weight_kg.errors }}</div>{% endif %}
+      </div>
+
+      <div class="field">
+        <label for="{{ form.date.id_for_label }}">Data</label>
+        {{ form.date }}
+        {% if form.date.errors %}<div class="error">{{ form.date.errors }}</div>{% endif %}
+      </div>
+
+      <div class="field field-full">
+        <label for="{{ form.notes.id_for_label }}">Notatki</label>
+        {{ form.notes }}
+        {% if form.notes.errors %}<div class="error">{{ form.notes.errors }}</div>{% endif %}
+      </div>
+    </div>
+
+    <div class="form-actions">
+      <a href="{% url 'index' %}" class="btn btn-outline">↩︎ Wróć</a>
+      <button type="submit" class="btn">Zapisz</button>
+    </div>
+  </form>
+{% endblock %}

@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <h1>Twoje najlepsze podejścia</h1>
+
+  {% if not table_ready %}
+    <div class="card warning">
+      <p><strong>Uwaga:</strong> Wygląda na to, że nie wykonano migracji bazy danych.</p>
+      <p>Uruchom w terminalu: <code>python manage.py migrate</code></p>
+    </div>
+  {% endif %}
+
+  {% if attempts %}
+    <div class="grid">
+      {% for a in attempts %}
+        <article class="card">
+          <header class="card-header">
+            <span class="badge">{{ a.get_lift_type_display }}</span>
+            <time datetime="{{ a.date }}">{{ a.date }}</time>
+          </header>
+          <div class="card-body">
+            <div class="pr-value">{{ a.weight_kg }} kg</div>
+            {% if a.notes %}
+              <p class="notes">{{ a.notes }}</p>
+            {% endif %}
+          </div>
+        </article>
+      {% endfor %}
+    </div>
+  {% else %}
+    <div class="empty">
+      <p>Brak zapisanych prób. <a href="{% url 'add_attempt' %}">Dodaj pierwszą</a>!</p>
+    </div>
+  {% endif %}
+{% endblock %}

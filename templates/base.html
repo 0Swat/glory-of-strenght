@@ -1,0 +1,30 @@
+{% load static %}
+<!doctype html>
+<html lang="pl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Power PR</title>
+  <link rel="stylesheet" href="{% static 'style.css' %}">
+</head>
+<body>
+  <header class="site-header">
+    <div class="container header-inner">
+      <a href="{% url 'index' %}" class="logo">🏋️ Power PR</a>
+      <nav>
+        <a class="btn" href="{% url 'add_attempt' %}">➕ Dodaj próbę</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container">
+    {% block content %}{% endblock %}
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <small>Prosta, prywatna apka do zapisywania najlepszych podejść.</small>
+    </div>
+  </footer>
+</body>
+</html>
